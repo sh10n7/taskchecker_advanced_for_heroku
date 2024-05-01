@@ -41,7 +41,7 @@ const deleteGenre = async(genreId) => {
     </div>
 </template>
 
-<style>
+<style scoped>
 ul {
   margin-bottom: 16px;
 }
