@@ -55,7 +55,7 @@ app.post("/tasks",
   .isInt().withMessage('genreId should be Number'),
 
   //titleが必須であること
-  body('title').exists().withMessage('title is required'),
+  body('name').exists().withMessage('name is required'),
 
   //explanationが必須であること
   body('explanation').exists().withMessage('explanation is required'),
@@ -76,6 +76,7 @@ app.post("/tasks",
 
 async (req, res) => {
   const errors = validationResult(req);
+  console.log(errors)
   if(!errors.isEmpty()){
     return res.status(400).json({ errors: errors.array()});
   }
@@ -113,6 +114,7 @@ app.put("/tasks/:id", async(req, res) => {
 
 // タスクの削除
 app.delete("/tasks/:id", async(req, res) => {
+  console.log(req)
   try {
     const taskId = parseInt(req.params.id, 10);
     const deletedTask = await prisma.task.delete({where: {id: taskId}})
